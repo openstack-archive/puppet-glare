@@ -50,6 +50,6 @@ class glare::db::postgresql(
     privileges    => $privileges,
   }
 
-  ::Openstacklib::Db::Postgresql['glare'] ~> Exec<| title == 'glare-manage db_sync' |>
+  ::Openstacklib::Db::Postgresql['glare'] ~> Exec<| title == 'glare-db-sync' |>
 
 }

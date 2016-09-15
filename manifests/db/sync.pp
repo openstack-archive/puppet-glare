@@ -1,23 +1,23 @@
 #
-# Class to execute glare-manage db_sync
+# Class to execute glare-db-manage
 #
 # == Parameters
 #
 # [*extra_params*]
 #   (optional) String of extra command line parameters to append
-#   to the glare-dbsync command.
-#   Defaults to undef
+#   to the glare-db-manage command.
+#   Defaults to '--config-file /etc/glare.conf'
 #
+
 class glare::db::sync(
-  $extra_params  = undef,
+  $extra_params  = '',
 ) {
   exec { 'glare-db-sync':
-    command     => "glare-manage db_sync ${extra_params}",
-    path        => '/usr/bin',
+    command     => "glare-db-manage ${extra_params} upgrade",
     user        => 'glare',
+    path        => [ '/bin/', '/usr/bin/' , '/usr/local/bin' ],
     refreshonly => true,
     subscribe   => [Package['glare'], Glare_config['database/connection']],
   }
-
-  Exec['glare-manage db_sync'] ~> Service<| title == 'glare' |>
+  Exec['glare-db-sync'] ~> Service<| title == 'glare' |>
 }

@@ -65,5 +65,5 @@ class glare::db::mysql(
     allowed_hosts => $allowed_hosts,
   }
 
-  ::Openstacklib::Db::Mysql['glare'] ~> Exec<| title == 'glare-manage db_sync' |>
+  ::Openstacklib::Db::Mysql['glare'] ~> Exec<| title == 'glare-db-sync' |>
 }
