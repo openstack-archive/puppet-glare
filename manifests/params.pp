@@ -5,8 +5,12 @@ class glare::params {
 
   case $::osfamily {
     'RedHat': {
+      $glare_package_name    = 'openstack-glare'
+      $glare_service_name    = 'openstack-glare-api'
     }
     'Debian': {
+      $glare_package_name    = 'glare'
+      $glare_service_name    = 'glare-api'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} operatingsystem")
