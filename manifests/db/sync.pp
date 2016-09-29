@@ -17,6 +17,8 @@ class glare::db::sync(
     user        => 'glare',
     path        => [ '/bin/', '/usr/bin/' , '/usr/local/bin' ],
     refreshonly => true,
+    try_sleep   => 5,
+    tries       => 10,
     subscribe   => [Package['glare'], Glare_config['database/connection']],
   }
   Exec['glare-db-sync'] ~> Service<| title == 'glare' |>
