@@ -42,6 +42,7 @@ class glare::db (
   $database_retry_interval = $::os_service_default,
   $database_max_overflow   = $::os_service_default,
 ) {
+  include ::glare::deps
 
   validate_re($database_connection,
     '^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?')

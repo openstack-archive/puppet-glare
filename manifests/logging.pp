@@ -112,6 +112,7 @@ class glare::logging(
   $instance_uuid_format          = $::os_service_default,
   $log_date_format               = $::os_service_default,
 ) {
+  include ::glare::deps
 
   oslo::log { 'glare_config':
     use_stderr                    => $use_stderr,

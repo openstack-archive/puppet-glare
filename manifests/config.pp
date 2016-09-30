@@ -23,6 +23,7 @@
 class glare::config (
   $glare_config = {},
 ) {
+  include ::glare::deps
 
   validate_hash($glare_config)
 

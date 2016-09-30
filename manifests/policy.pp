@@ -27,6 +27,7 @@ class glare::policy (
   $policies    = {},
   $policy_path = '/etc/glare/policy.json',
 ) {
+  include ::glare::deps
 
   validate_hash($policies)
 

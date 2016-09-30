@@ -112,10 +112,12 @@ class glare (
   include ::glare::params
   include ::glare::db
   include ::glare::logging
+  include ::glare::deps
 
   ensure_packages ( 'glare' , {
     ensure => $package_ensure,
     name   => $::glare::params::glare_package_name,
+    tag    => ['openstack', 'glare-package'],
   })
 
   glare_config {
@@ -171,6 +173,7 @@ class glare (
   service { 'glare':
     ensure => $service_ensure,
     name   => $::glare::params::glare_service_name,
-    enable => $enabled
+    enable => $enabled,
+    tag    => 'glare',
   }
 }

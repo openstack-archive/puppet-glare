@@ -68,6 +68,7 @@ class glare::keystone::auth (
   $admin_url           = 'http://127.0.0.1:FIXME',
   $internal_url        = 'http://127.0.0.1:FIXME',
 ) {
+  include ::glare::deps
 
   if $configure_user_role {
     Keystone_user_role["${auth_name}@${tenant}"] ~> Service <| name == 'glare-server' |>
