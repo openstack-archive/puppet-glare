@@ -90,24 +90,30 @@
 #   value)
 #   Defaults to false
 #
+# [*purge_config*]
+#   (optional) Whether to set only the specified config options
+#   in the glare config.
+#   Defaults to false.
+#
 class glare (
-  $package_ensure            = 'present',
-  $bind_host                 = $::os_service_default,
-  $bind_port                 = $::os_service_default,
-  $backlog                   = $::os_service_default,
-  $workers                   = $::os_workers,
-  $auth_strategy             = 'keystone',
-  $pipeline                  = 'keystone',
-  $manage_service            = true,
-  $enabled                   = true,
-  $cert_file                 = $::os_service_default,
-  $key_file                  = $::os_service_default,
-  $ca_file                   = $::os_service_default,
-  $stores                    = $::os_service_default,
-  $default_store             = $::os_service_default,
-  $filesystem_store_datadir  = '/var/lib/glare/images',
-  $os_region_name            = 'RegionOne',
-  $allow_anonymous_access    = $::os_service_default,
+  $package_ensure           = 'present',
+  $bind_host                = $::os_service_default,
+  $bind_port                = $::os_service_default,
+  $backlog                  = $::os_service_default,
+  $workers                  = $::os_workers,
+  $auth_strategy            = 'keystone',
+  $pipeline                 = 'keystone',
+  $manage_service           = true,
+  $enabled                  = true,
+  $cert_file                = $::os_service_default,
+  $key_file                 = $::os_service_default,
+  $ca_file                  = $::os_service_default,
+  $stores                   = $::os_service_default,
+  $default_store            = $::os_service_default,
+  $filesystem_store_datadir = '/var/lib/glare/images',
+  $os_region_name           = 'RegionOne',
+  $allow_anonymous_access   = $::os_service_default,
+  $purge_config             = false,
 ) {
   include ::glare::params
   include ::glare::db
@@ -119,6 +125,10 @@ class glare (
     name   => $::glare::params::glare_package_name,
     tag    => ['openstack', 'glare-package'],
   })
+
+  resources { 'glare_config':
+    purge  => $purge_config,
+  }
 
   glare_config {
     'DEFAULT/bind_host'             : value => $bind_host;
