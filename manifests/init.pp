@@ -78,7 +78,7 @@
 #
 # [*filesystem_store_datadir*]
 #
-#   filesystem_store_datadir = /var/lib/glance/images
+#   filesystem_store_datadir = /var/lib/glare/images
 #
 # [*os_region_name*]
 #   (optional) Sets the keystone region to use.
