@@ -19,6 +19,7 @@ describe 'glare::policy' do
         :key   => 'context_is_admin',
         :value => 'foo:bar'
       })
+      is_expected.to contain_glare_config('oslo_policy/policy_file').with_value('/etc/glare/policy.json')
     end
   end
 
