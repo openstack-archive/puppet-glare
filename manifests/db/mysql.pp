@@ -52,6 +52,7 @@ class glare::db::mysql(
   $collate       = 'utf8_general_ci',
   $allowed_hosts = undef
 ) {
+
   include ::glare::deps
 
   validate_string($password)
@@ -65,8 +66,6 @@ class glare::db::mysql(
     collate       => $collate,
     allowed_hosts => $allowed_hosts,
   }
-
-  ::Openstacklib::Db::Mysql['glare'] ~> Exec<| title == 'glare-db-sync' |>
 
   Anchor['glare::db::begin']
   ~> Class['glare::db::mysql']

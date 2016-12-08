@@ -115,6 +115,7 @@ class glare (
   $allow_anonymous_access   = $::os_service_default,
   $purge_config             = false,
 ) {
+
   include ::glare::params
   include ::glare::db
   include ::glare::logging

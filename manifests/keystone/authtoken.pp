@@ -221,6 +221,7 @@ class glare::keystone::authtoken(
   $signing_dir                    = $::os_service_default,
   $token_cache_time               = $::os_service_default,
 ) {
+
   include ::glare::deps
 
   keystone::resource::authtoken { 'glare_config':

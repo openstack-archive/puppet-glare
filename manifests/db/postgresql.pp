@@ -39,9 +39,8 @@ class glare::db::postgresql(
   $encoding   = undef,
   $privileges = 'ALL',
 ) {
-  include ::glare::deps
 
-  Class['glare::db::postgresql'] -> Service<| title == 'glare' |>
+  include ::glare::deps
 
   ::openstacklib::db::postgresql { 'glare':
     password_hash => postgresql_password($user, $password),
@@ -51,7 +50,6 @@ class glare::db::postgresql(
     privileges    => $privileges,
   }
 
-  ::Openstacklib::Db::Postgresql['glare'] ~> Exec<| title == 'glare-db-sync' |>
   Anchor['glare::db::begin']
   ~> Class['glare::db::postgresql']
   ~> Anchor['glare::db::end']

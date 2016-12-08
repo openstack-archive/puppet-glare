@@ -12,6 +12,7 @@
 class glare::db::sync(
   $extra_params  = '',
 ) {
+
   include ::glare::deps
 
   exec { 'glare-db-sync':
@@ -26,5 +27,4 @@ class glare::db::sync(
     ],
     notify      => Anchor['glare::dbsync::end'],
   }
-  Exec['glare-db-sync'] ~> Service<| title == 'glare' |>
 }
