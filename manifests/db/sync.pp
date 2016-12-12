@@ -6,9 +6,8 @@
 # [*extra_params*]
 #   (optional) String of extra command line parameters to append
 #   to the glare-db-manage command.
-#   Defaults to '--config-file /etc/glare.conf'
+#   Defaults to ''
 #
-
 class glare::db::sync(
   $extra_params  = '',
 ) {
@@ -20,6 +19,8 @@ class glare::db::sync(
     user        => 'glare',
     path        => [ '/bin/', '/usr/bin/' , '/usr/local/bin' ],
     refreshonly => true,
+    try_sleep   => 5,
+    tries       => 10,
     subscribe   => [
       Anchor['glare::install::end'],
       Anchor['glare::config::end'],

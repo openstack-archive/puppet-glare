@@ -1,20 +1,62 @@
 require 'spec_helper'
 
 describe 'glare::db::sync' do
-  context 'exec has proper name' do
-    it { is_expected.to contain_exec('glare-db-sync') }
-  end
 
-  context 'class sync default command' do
-    it { is_expected.to contain_exec('glare-db-sync').with_command(
-      'glare-db-manage  upgrade') }
-  end
+  shared_examples_for 'glare-dbsync' do
 
-  context 'class sync work with parameters' do
-    let :params do
-      { :extra_params  => '-yyy' }
+    it 'runs glare-manage db_sync' do
+      is_expected.to contain_exec('glare-db-sync').with(
+        :command     => 'glare-db-manage  upgrade',
+        :user        => 'glare',
+        :path        => ["/bin/","/usr/bin/" ,"/usr/local/bin"],
+        :refreshonly => 'true',
+        :try_sleep   => 5,
+        :tries       => 10,
+        :subscribe   => ['Anchor[glare::install::end]',
+                         'Anchor[glare::config::end]',
+                         'Anchor[glare::dbsync::begin]'],
+        :notify      => 'Anchor[glare::dbsync::end]',
+      )
     end
-    it { is_expected.to contain_exec('glare-db-sync').with_command('glare-db-manage -yyy upgrade') }
+
+    describe "overriding extra_params" do
+      let :params do
+        {
+          :extra_params => '--config-file /etc/glare/glare.conf',
+        }
+      end
+
+      it {
+        is_expected.to contain_exec('glare-db-sync').with(
+          :command     => 'glare-db-manage --config-file /etc/glare/glare.conf upgrade',
+          :user        => 'glare',
+          :path        => ["/bin/","/usr/bin/" ,"/usr/local/bin"],
+          :refreshonly => 'true',
+          :try_sleep   => 5,
+          :tries       => 10,
+          :subscribe   => ['Anchor[glare::install::end]',
+                           'Anchor[glare::config::end]',
+                           'Anchor[glare::dbsync::begin]'],
+          :notify      => 'Anchor[glare::dbsync::end]',
+        )
+      }
+    end
+
+  end
+
+  on_supported_os({
+    :supported_os   => OSDefaults.get_supported_os
+  }).each do |os,facts|
+    context "on #{os}" do
+      let (:facts) do
+        facts.merge(OSDefaults.get_facts({
+          :os_workers     => 8,
+          :concat_basedir => '/var/lib/puppet/concat'
+        }))
+      end
+
+      it_configures 'glare-dbsync'
+    end
   end
 
 end
