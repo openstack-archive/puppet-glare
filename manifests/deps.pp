@@ -24,6 +24,10 @@ class glare::deps {
   ~> Service<| tag == 'glare' |>
   ~> anchor { 'glare::service::end': }
 
+  # all db settings should be applied and all packages should be installed
+  # before dbsync starts
+  Oslo::Db<||> -> Anchor['glare::dbsync::begin']
+
   # Ensure files are modified in the config block
   Anchor['glare::config::begin']
   -> File_line<| tag == 'glare-file-line' |>
