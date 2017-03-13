@@ -46,8 +46,8 @@ describe 'glare' do
 
       it 'configures storage' do
         is_expected.to contain_glare_config('glance_store/os_region_name').with_value('RegionOne')
-        is_expected.to contain_glare_config('glance_store/stores').with_value('<SERVICE DEFAULT>')
-        is_expected.to contain_glare_config('glance_store/default_store').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_glare_config('glance_store/stores').with_ensure('absent')
+        is_expected.not_to contain_glare_config('glance_store/default_store')
         is_expected.to contain_glare_config('glance_store/filesystem_store_datadir').with_value('/var/lib/glare/images')
       end
 

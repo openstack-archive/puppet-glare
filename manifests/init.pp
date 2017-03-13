@@ -56,7 +56,7 @@
 # [*stores*]
 #   (optional) List of which store classes and store class locations are
 #   currently known to glare at startup.
-#   Defaults to $::os_service_default,
+#   Defaults to undef,
 #   Example: file,http
 #   Possible values:
 #     * A comma separated list that could include:
@@ -74,7 +74,11 @@
 # [*default_store*]
 #   (optional)  Allowed values: file, filesystem, http, https, swift,
 #   swift+http, swift+https, swift+config, rbd, sheepdog, cinder, vsphere
-#   default_store = $::os_service_default,
+#   default_store = undef,
+#
+# [*multi_store*]
+#   (optional) Boolean describing if multiple backends will be configured
+#   Defaults to false
 #
 # [*filesystem_store_datadir*]
 #
@@ -112,8 +116,9 @@ class glare (
   $cert_file                = $::os_service_default,
   $key_file                 = $::os_service_default,
   $ca_file                  = $::os_service_default,
-  $stores                   = $::os_service_default,
-  $default_store            = $::os_service_default,
+  $stores                   = undef,
+  $default_store            = undef,
+  $multi_store              = false,
   $filesystem_store_datadir = '/var/lib/glare/images',
   $os_region_name           = 'RegionOne',
   $allow_anonymous_access   = $::os_service_default,
@@ -148,11 +153,52 @@ class glare (
     'DEFAULT/allow_anonymous_access': value => $allow_anonymous_access;
   }
 
+  # stores config
+  if $default_store {
+    $default_store_real = $default_store
+  }
+  if !empty($stores) {
+    # determine value for glance_store/stores
+    if size(any2array($stores)) > 1 {
+      $stores_real = join($stores, ',')
+    } else {
+      $stores_real = $stores[0]
+    }
+    if !$default_store_real {
+      # set default store based on provided stores when it isn't explicitly set
+      warning("default_store not provided, it will be automatically set to ${stores[0]}")
+      $default_store_real = $stores[0]
+    }
+  } elsif $default_store_real {
+    # set stores based on default_store if only default_store is provided
+    $stores_real = $default_store
+  } else {
+    warning('Glare is being provisioned without any stores configured')
+  }
+
+  if $default_store_real and $multi_store {
+    glare_config {
+      'glance_store/default_store': value => $default_store_real;
+    }
+  } elsif $multi_store {
+    glare_config {
+      'glance_store/default_store': ensure => absent;
+    }
+  }
+
+  if $stores_real {
+    glare_config {
+      'glance_store/stores': value => $stores_real;
+    }
+  } else {
+    glare_config {
+      'glance_store/stores': ensure => absent;
+    }
+  }
+
   glare_config {
-    'glance_store/os_region_name'          : value   => $os_region_name;
-    'glance_store/stores'                  : value   => $stores;
-    'glance_store/default_store'           : value   => $default_store;
-    'glance_store/filesystem_store_datadir': value   => $filesystem_store_datadir;
+    'glance_store/os_region_name'           : value => $os_region_name;
+    'glance_store/filesystem_store_datadir' : value => $filesystem_store_datadir;
   }
 
   if $pipeline != '' {

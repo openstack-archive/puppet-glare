@@ -47,6 +47,9 @@ class glare::deps {
   # the glare::install::end anchor.  The line between glare-support-package and
   # glare-package should be whether or not glare services would need to be
   # restarted if the package state was changed.
+  Anchor['glare::install::begin']
+  -> Package<| tag == 'glare-support-package'|>
+  -> Anchor['glare::install::end']
 
   # Installation or config changes will always restart services.
   Anchor['glare::install::end'] ~> Anchor['glare::service::begin']
