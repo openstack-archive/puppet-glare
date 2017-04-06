@@ -95,6 +95,10 @@
 #   in the glare config.
 #   Defaults to false.
 #
+# [*sync_db*]
+#   (Optional) Run db sync on the node.
+#   Defaults to true
+#
 class glare (
   $package_ensure           = 'present',
   $bind_host                = $::os_service_default,
@@ -114,12 +118,17 @@ class glare (
   $os_region_name           = 'RegionOne',
   $allow_anonymous_access   = $::os_service_default,
   $purge_config             = false,
+  $sync_db                  = true,
 ) {
 
   include ::glare::params
   include ::glare::db
   include ::glare::logging
   include ::glare::deps
+
+  if $sync_db {
+    include ::glare::db::sync
+  }
 
   ensure_packages ( 'glare' , {
     ensure => $package_ensure,

@@ -1,17 +1,16 @@
 require 'spec_helper'
 
 describe 'glare' do
+  let :pre_condition do
+   "class { '::glare::keystone::authtoken':
+     password => 'ChangeMe' }"
+  end
 
   shared_examples 'glare' do
 
     context 'with default parameters' do
       let :params do
-         { :purge_config => false  } 
-      end
-
-      let :pre_condition do
-         "class { '::glare::keystone::authtoken':
-           password => 'ChangeMe' }"
+         { :purge_config => false }
       end
 
       it 'contains the params class' do
@@ -43,6 +42,8 @@ describe 'glare' do
       it { is_expected.to contain_glare_config('DEFAULT/bind_port').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to contain_glare_config('DEFAULT/backlog').with_value('<SERVICE DEFAULT>') }
 
+      it { is_expected.to contain_class('glare::db::sync') }
+
       it 'configures storage' do
         is_expected.to contain_glare_config('glance_store/os_region_name').with_value('RegionOne')
         is_expected.to contain_glare_config('glance_store/stores').with_value('<SERVICE DEFAULT>')
@@ -68,6 +69,14 @@ describe 'glare' do
           'enable' => true,
         ) }
     end
+
+    context 'with db sync disabled' do
+      let :params do
+         { :sync_db => false }
+      end
+      it { is_expected.not_to contain_class('glare::db::sync') }
+    end
+
   end
 
   on_supported_os({
