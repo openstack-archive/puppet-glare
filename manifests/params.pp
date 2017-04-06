@@ -9,7 +9,7 @@ class glare::params {
       $glare_service_name    = 'openstack-glare-api'
     }
     'Debian': {
-      $glare_package_name    = 'glare'
+      $glare_package_name    = 'glare-api'
       $glare_service_name    = 'glare-api'
     }
     default: {

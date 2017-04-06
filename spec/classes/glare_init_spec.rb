@@ -81,7 +81,7 @@ describe 'glare' do
       case facts[:osfamily]
       when 'Debian'
         let (:platform_params) do
-          { :glare_package_name => 'glare',
+          { :glare_package_name => 'glare-api',
             :glare_service_name => 'glare-api' }
         end
       when 'RedHat'
