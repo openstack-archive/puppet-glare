@@ -7,6 +7,11 @@ class glare::params {
     'RedHat': {
       $glare_package_name    = 'openstack-glare'
       $glare_service_name    = 'openstack-glare-api'
+      if ($::operatingsystem != 'fedora' and versioncmp($::operatingsystemrelease, '7') < 0) {
+        $pyceph_package_name = 'python-ceph'
+      } else {
+        $pyceph_package_name = 'python-rbd'
+      }
     }
     'Debian': {
       $glare_package_name    = 'glare-api'
