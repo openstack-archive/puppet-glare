@@ -41,6 +41,19 @@ describe 'glare::backend::rbd' do
     }
   end
 
+  describe 'with not managed ceph package' do
+    let :params do
+      {
+        :package_manage => false
+      }
+    end
+
+    it 'does not configure ceph package' do
+      is_expected.not_to contain_package('python-ceph').with(
+        :name => 'python-ceph')
+    end
+  end
+
   describe 'package on RedHat platform el6' do
     let :facts do
       OSDefaults.get_facts({

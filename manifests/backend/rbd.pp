@@ -21,6 +21,11 @@
 #    Optional. Enables direct COW from glare to rbd
 #    DEPRECATED, use show_image_direct_url in glare::api
 #
+#  [*package_manage*]
+#      (optional) Whether manage ceph package
+#      state or not.
+#      Defaults to true.
+#
 #  [*package_ensure*]
 #      (optional) Desired ensure state of packages.
 #      accepts latest or specific versions.
@@ -41,6 +46,7 @@ class glare::backend::rbd(
   $rbd_store_ceph_conf    = $::os_service_default,
   $rbd_store_pool         = $::os_service_default,
   $rbd_store_chunk_size   = $::os_service_default,
+  $package_manage         = true,
   $package_ensure         = 'present',
   $rados_connect_timeout  = $::os_service_default,
   $multi_store            = false,
@@ -62,12 +68,14 @@ class glare::backend::rbd(
     glare_config { 'glance_store/default_store': value => 'rbd'; }
   }
 
-  ensure_packages('python-ceph',
-      {
-        ensure => $package_ensure,
-        name   => $::glare::params::pyceph_package_name,
-        tag    => 'glare-support-package',
-      }
-  )
+  if $package_manage {
+    ensure_packages('python-ceph',
+        {
+          ensure => $package_ensure,
+          name   => $::glare::params::pyceph_package_name,
+          tag    => 'glare-support-package',
+        }
+    )
+  }
 
 }
