@@ -3,6 +3,8 @@
 class glare::params {
   include ::openstacklib::defaults
 
+  $group = 'glare'
+
   case $::osfamily {
     'RedHat': {
       $glare_package_name    = 'openstack-glare'
