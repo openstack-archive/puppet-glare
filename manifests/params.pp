@@ -4,6 +4,7 @@ class glare::params {
   include ::openstacklib::defaults
 
   $group = 'glare'
+  $client_package_name = 'python-glareclient'
 
   case $::osfamily {
     'RedHat': {
