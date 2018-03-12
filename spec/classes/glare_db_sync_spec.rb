@@ -17,6 +17,7 @@ describe 'glare::db::sync' do
                          'Anchor[glare::config::end]',
                          'Anchor[glare::dbsync::begin]'],
         :notify      => 'Anchor[glare::dbsync::end]',
+        :tag         => 'openstack-db',
       )
     end
 
@@ -40,6 +41,7 @@ describe 'glare::db::sync' do
                            'Anchor[glare::config::end]',
                            'Anchor[glare::dbsync::begin]'],
           :notify      => 'Anchor[glare::dbsync::end]',
+          :tag         => 'openstack-db',
         )
       }
     end

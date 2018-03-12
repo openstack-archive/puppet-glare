@@ -28,5 +28,6 @@ class glare::db::sync(
       Anchor['glare::dbsync::begin']
     ],
     notify      => Anchor['glare::dbsync::end'],
+    tag         => 'openstack-db',
   }
 }
