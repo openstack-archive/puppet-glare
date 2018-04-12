@@ -24,8 +24,17 @@ describe 'glare::client' do
         facts.merge!(OSDefaults.get_facts())
       end
 
-      let :platform_params do
-        { :client_package_name => 'python-glareclient' }
+      let(:platform_params) do
+        case facts[:osfamily]
+        when 'Debian'
+          if facts[:os_package_type] == 'debian'
+            { :client_package_name => 'python3-glareclient' }
+          else
+            { :client_package_name => 'python-glareclient' }
+          end
+        when 'RedHat'
+          { :client_package_name => 'python-glareclient' }
+        end
       end
 
       it_behaves_like 'glare client'
