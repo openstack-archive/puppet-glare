@@ -3,8 +3,14 @@
 class glare::params {
   include ::openstacklib::defaults
 
+  if ($::os_package_type == 'debian') {
+    $pyvers = '3'
+  } else {
+    $pyvers = ''
+  }
+
   $group = 'glare'
-  $client_package_name = 'python-glareclient'
+  $client_package_name = "python${pyvers}-glareclient"
 
   case $::osfamily {
     'RedHat': {
