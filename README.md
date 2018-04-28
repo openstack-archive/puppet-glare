@@ -33,7 +33,7 @@ Setup
 
 **What the glare module affects**
 
-* [Glare](https://wiki.openstack.org/wiki/Glare), the glare service for OpenStack.
+* [Glare](https://github.com/openstack/glare), the glare service for OpenStack.
 
 ### Installing glare
 
