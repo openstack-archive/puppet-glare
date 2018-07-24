@@ -88,6 +88,6 @@ Contributors
 * https://github.com/openstack/puppet-glare/graphs/contributors
 
 Repository
--------------
+----------
 
 * https://git.openstack.org/cgit/openstack/puppet-glare
