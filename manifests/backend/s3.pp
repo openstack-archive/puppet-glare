@@ -80,8 +80,8 @@ class glare::backend::s3(
 
   # Glare hasn't its own store, glance_store should be used
   glare_config {
-    'glance_store/s3_store_access_key':              value => $access_key;
-    'glance_store/s3_store_secret_key':              value => $secret_key;
+    'glance_store/s3_store_access_key':              value => $access_key, secret => true;
+    'glance_store/s3_store_secret_key':              value => $secret_key, secret => true;
     'glance_store/s3_store_host':                    value => $host;
     'glance_store/s3_store_bucket':                  value => $bucket;
     'glance_store/s3_store_bucket_url_format':       value => $bucket_url_format;
