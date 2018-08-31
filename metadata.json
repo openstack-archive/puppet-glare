@@ -1,6 +1,6 @@
 {
     "name": "openstack-glare",
-    "version": "2.3.0",
+    "version": "3.0.0",
     "author": "OpenStack Contributors",
     "summary": "Puppet module for OpenStack Glare",
     "license": "Apache-2.0",
@@ -40,15 +40,15 @@
         },
         {
             "name": "openstack/openstacklib",
-            "version_requirement": ">=13.3.0 <14.0.0"
+            "version_requirement": ">=14.0.0 <15.0.0"
         },
         {
             "name": "openstack/keystone",
-            "version_requirement": ">=13.3.0 <14.0.0"
+            "version_requirement": ">=14.0.0 <15.0.0"
         },
         {
             "name": "openstack/oslo",
-            "version_requirement": ">=13.3.0 <14.0.0"
+            "version_requirement": ">=14.0.0 <15.0.0"
         }
     ]
 }
