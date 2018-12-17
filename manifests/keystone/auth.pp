@@ -33,7 +33,7 @@
 #
 # [*service_type*]
 #   (Optional) Type of service.
-#   Defaults to 'key-manager'.
+#   Defaults to 'artifact'.
 #
 # [*region*]
 #   (Optional) Region for endpoint.
@@ -45,21 +45,21 @@
 #
 # [*service_description*]
 #   (Optional) Description of the service.
-#   Default to 'glare FIXME Service'
+#   Default to 'Glare Artifact Repository Service'
 #
 # [*public_url*]
 #   (0ptional) The endpoint's public url.
 #   This url should *not* contain any trailing '/'.
-#   Defaults to 'http://127.0.0.1:FIXME'
+#   Defaults to 'http://127.0.0.1:9494'
 #
 # [*admin_url*]
 #   (Optional) The endpoint's admin url.
 #   This url should *not* contain any trailing '/'.
-#   Defaults to 'http://127.0.0.1:FIXME'
+#   Defaults to 'http://127.0.0.1:9494'
 #
 # [*internal_url*]
 #   (Optional) The endpoint's internal url.
-#   Defaults to 'http://127.0.0.1:FIXME
+#   Defaults to 'http://127.0.0.1:9494
 #
 class glare::keystone::auth (
   $password,
@@ -70,12 +70,12 @@ class glare::keystone::auth (
   $configure_user      = true,
   $configure_user_role = true,
   $service_name        = 'glare',
-  $service_description = 'glare FIXME Service',
-  $service_type        = 'FIXME',
+  $service_description = 'Glare Artifact Repository Service',
+  $service_type        = 'artifact',
   $region              = 'RegionOne',
-  $public_url          = 'http://127.0.0.1:FIXME',
-  $admin_url           = 'http://127.0.0.1:FIXME',
-  $internal_url        = 'http://127.0.0.1:FIXME',
+  $public_url          = 'http://127.0.0.1:9494',
+  $admin_url           = 'http://127.0.0.1:9494',
+  $internal_url        = 'http://127.0.0.1:9494',
 ) {
   include ::glare::deps
 

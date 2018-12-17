@@ -1,0 +1,8 @@
+---
+upgrade:
+  - The default value for glare::keystone::auth::internal_url
+    is changed to 'http://127.0.0.1:9494'.
+  - The default value for glare::keystone::auth::admin_url
+    is changed to 'http://127.0.0.1:9494'.
+  - The default value for glare::keystone::auth::public_url
+    is changed to 'http://127.0.0.1:9494'.

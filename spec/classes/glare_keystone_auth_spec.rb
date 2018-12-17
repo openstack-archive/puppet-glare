@@ -22,16 +22,16 @@ describe 'glare::keystone::auth' do
         :roles   => ['admin']
       )}
 
-      it { is_expected.to contain_keystone_service('glare::FIXME').with(
+      it { is_expected.to contain_keystone_service('glare::artifact').with(
         :ensure      => 'present',
-        :description => 'glare FIXME Service'
+        :description => 'Glare Artifact Repository Service'
       ) }
 
-      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::FIXME').with(
+      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::artifact').with(
         :ensure       => 'present',
-        :public_url   => 'http://127.0.0.1:FIXME',
-        :admin_url    => 'http://127.0.0.1:FIXME',
-        :internal_url => 'http://127.0.0.1:FIXME',
+        :public_url   => 'http://127.0.0.1:9494',
+        :admin_url    => 'http://127.0.0.1:9494',
+        :internal_url => 'http://127.0.0.1:9494',
       ) }
     end
 
@@ -43,7 +43,7 @@ describe 'glare::keystone::auth' do
           :admin_url    => 'http://10.10.10.12:81', }
       end
 
-      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::FIXME').with(
+      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::artifact').with(
         :ensure       => 'present',
         :public_url   => 'https://10.10.10.10:80',
         :internal_url => 'http://10.10.10.11:81',
@@ -59,8 +59,8 @@ describe 'glare::keystone::auth' do
 
       it { is_expected.to contain_keystone_user('glarey') }
       it { is_expected.to contain_keystone_user_role('glarey@services') }
-      it { is_expected.to contain_keystone_service('glare::FIXME') }
-      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::FIXME') }
+      it { is_expected.to contain_keystone_service('glare::artifact') }
+      it { is_expected.to contain_keystone_endpoint('RegionOne/glare::artifact') }
     end
 
     context 'when overriding service name' do
@@ -72,8 +72,8 @@ describe 'glare::keystone::auth' do
 
       it { is_expected.to contain_keystone_user('glare') }
       it { is_expected.to contain_keystone_user_role('glare@services') }
-      it { is_expected.to contain_keystone_service('glare_service::FIXME') }
-      it { is_expected.to contain_keystone_endpoint('RegionOne/glare_service::FIXME') }
+      it { is_expected.to contain_keystone_service('glare_service::artifact') }
+      it { is_expected.to contain_keystone_endpoint('RegionOne/glare_service::artifact') }
     end
 
     context 'when disabling user configuration' do
@@ -87,9 +87,9 @@ describe 'glare::keystone::auth' do
 
       it { is_expected.not_to contain_keystone_user('glare') }
       it { is_expected.to contain_keystone_user_role('glare@services') }
-      it { is_expected.to contain_keystone_service('glare::FIXME').with(
+      it { is_expected.to contain_keystone_service('glare::artifact').with(
         :ensure      => 'present',
-        :description => 'glare FIXME Service'
+        :description => 'Glare Artifact Repository Service'
       ) }
 
     end
@@ -106,9 +106,9 @@ describe 'glare::keystone::auth' do
 
       it { is_expected.not_to contain_keystone_user('glare') }
       it { is_expected.not_to contain_keystone_user_role('glare@services') }
-      it { is_expected.to contain_keystone_service('glare::FIXME').with(
+      it { is_expected.to contain_keystone_service('glare::artifact').with(
         :ensure      => 'present',
-        :description => 'glare FIXME Service'
+        :description => 'Glare Artifact Repository Service'
       ) }
 
     end
