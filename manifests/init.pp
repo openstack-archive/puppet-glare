@@ -128,7 +128,6 @@ class glare (
 
   include ::glare::params
   include ::glare::db
-  include ::glare::logging
   include ::glare::deps
 
   if $sync_db {

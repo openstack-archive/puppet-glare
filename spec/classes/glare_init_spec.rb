@@ -21,10 +21,6 @@ describe 'glare' do
         is_expected.to contain_class('glare::db')
       end
 
-      it 'contains the logging class' do
-        is_expected.to contain_class('glare::logging')
-      end
-
       it 'installs package' do
         is_expected.to contain_package('glare').with(
           :ensure => 'present',
