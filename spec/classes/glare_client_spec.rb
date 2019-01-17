@@ -27,11 +27,7 @@ describe 'glare::client' do
       let(:platform_params) do
         case facts[:osfamily]
         when 'Debian'
-          if facts[:os_package_type] == 'debian'
-            { :client_package_name => 'python3-glareclient' }
-          else
-            { :client_package_name => 'python-glareclient' }
-          end
+          { :client_package_name => 'python3-glareclient' }
         when 'RedHat'
           { :client_package_name => 'python-glareclient' }
         end

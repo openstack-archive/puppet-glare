@@ -2,13 +2,7 @@
 #
 class glare::params {
   include ::openstacklib::defaults
-
-  if ($::os_package_type == 'debian') or ($::os['name'] == 'Fedora') or
-    ($::os['family'] == 'RedHat' and Integer.new($::os['release']['major']) > 7) {
-    $pyvers = '3'
-  } else {
-    $pyvers = ''
-  }
+  $pyvers = $::openstacklib::defaults::pyvers
 
   $group = 'glare'
   $client_package_name = "python${pyvers}-glareclient"
@@ -18,9 +12,9 @@ class glare::params {
       $glare_package_name    = 'openstack-glare'
       $glare_service_name    = 'openstack-glare-api'
       if ($::operatingsystem != 'fedora' and versioncmp($::operatingsystemrelease, '7') < 0) {
-        $pyceph_package_name = 'python-ceph'
+        $pyceph_package_name = "python${pyvers}-ceph"
       } else {
-        $pyceph_package_name = 'python-rbd'
+        $pyceph_package_name = "python${pyvers}-rbd"
       }
     }
     'Debian': {
