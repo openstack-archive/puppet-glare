@@ -45,7 +45,7 @@ class glare::db::mysql(
 
   include ::glare::deps
 
-  validate_string($password)
+  validate_legacy(String, 'validate_string', $password)
 
   ::openstacklib::db::mysql { 'glare':
     user          => $user,

@@ -30,8 +30,8 @@ class glare::config (
 
   include ::glare::deps
 
-  validate_hash($glare_config)
-  validate_hash($glare_paste_ini_config)
+  validate_legacy(Hash, 'validate_hash', $glare_config)
+  validate_legacy(Hash, 'validate_hash', $glare_paste_ini_config)
 
   create_resources('glare_config', $glare_config)
   create_resources('glare_paste_ini', $glare_paste_ini_config)
