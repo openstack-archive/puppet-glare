@@ -95,4 +95,4 @@ Contributors
 Repository
 ----------
 
-* https://git.openstack.org/cgit/openstack/puppet-glare
+* https://opendev.org/openstack/puppet-glare
