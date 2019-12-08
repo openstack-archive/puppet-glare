@@ -64,7 +64,7 @@ class glare::backend::s3(
   $multi_store              = false,
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   if !is_service_default($large_object_chunk_size){
     if !is_integer($large_object_chunk_size) or $large_object_chunk_size < 5 {

@@ -12,7 +12,7 @@ class glare::db::sync(
   $extra_params  = '',
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   exec { 'glare-db-sync':
     command     => "glare-db-manage ${extra_params} upgrade",

@@ -64,8 +64,8 @@ class glare::backend::swift(
   $multi_store                         = false,
 ) {
 
-  include ::glare::deps
-  include ::swift::client
+  include glare::deps
+  include swift::client
   Class['swift::client'] -> Anchor['glare::install::end']
   Service<| tag == 'swift-service' |> -> Service['glare']
 

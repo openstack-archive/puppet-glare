@@ -62,7 +62,7 @@ class glare::db (
   $database_idle_timeout            = undef,
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   validate_legacy(Oslo::Dbconn, 'validate_re', $database_connection,
     ['^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?'])

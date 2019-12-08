@@ -44,7 +44,7 @@ class glare::backend::cinder(
   $multi_store                 = false,
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   # Glare hasn't its own store, glance_store should be used
   glare_config {

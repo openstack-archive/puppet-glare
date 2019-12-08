@@ -1,7 +1,7 @@
 # Parameters for puppet-glare
 #
 class glare::params {
-  include ::openstacklib::defaults
+  include openstacklib::defaults
   $pyvers = $::openstacklib::defaults::pyvers
 
   $group = 'glare'

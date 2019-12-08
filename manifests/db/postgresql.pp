@@ -32,7 +32,7 @@ class glare::db::postgresql(
   $privileges = 'ALL',
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   ::openstacklib::db::postgresql { 'glare':
     password_hash => postgresql_password($user, $password),

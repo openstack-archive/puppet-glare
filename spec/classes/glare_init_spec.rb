@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'glare' do
   let :pre_condition do
-   "class { '::glare::keystone::authtoken':
+   "class { 'glare::keystone::authtoken':
      password => 'ChangeMe' }"
   end
 

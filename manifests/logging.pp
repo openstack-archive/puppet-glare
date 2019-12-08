@@ -123,7 +123,7 @@ class glare::logging(
   $log_date_format               = $::os_service_default,
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   oslo::log { 'glare_config':
     use_stderr                    => $use_stderr,

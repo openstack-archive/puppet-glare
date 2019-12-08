@@ -126,12 +126,12 @@ class glare (
   $sync_db                  = true,
 ) {
 
-  include ::glare::params
-  include ::glare::db
-  include ::glare::deps
+  include glare::params
+  include glare::db
+  include glare::deps
 
   if $sync_db {
-    include ::glare::db::sync
+    include glare::db::sync
   }
 
   ensure_packages ( 'glare' , {
@@ -217,7 +217,7 @@ class glare (
 
   # keystone config
   if $auth_strategy == 'keystone' {
-    include ::glare::keystone::authtoken
+    include glare::keystone::authtoken
   }
 
   # SSL Options

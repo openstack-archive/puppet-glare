@@ -46,8 +46,8 @@ class glare::backend::rbd(
   $multi_store           = false,
 ) {
 
-  include ::glare::deps
-  include ::glare::params
+  include glare::deps
+  include glare::params
 
   # Glare hasn't its own store, glance_store should be used
   glare_config {

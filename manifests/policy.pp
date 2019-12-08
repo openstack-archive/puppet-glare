@@ -28,8 +28,8 @@ class glare::policy (
   $policy_path = '/etc/glare/policy.json',
 ) {
 
-  include ::glare::deps
-  include ::glare::params
+  include glare::deps
+  include glare::params
 
   validate_legacy(Hash, 'validate_hash', $policies)
 

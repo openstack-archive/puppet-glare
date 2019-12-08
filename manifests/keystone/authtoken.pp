@@ -202,7 +202,7 @@ class glare::keystone::authtoken(
   $service_token_roles_required   = $::os_service_default,
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   keystone::resource::authtoken { 'glare_config':
     username                       => $username,

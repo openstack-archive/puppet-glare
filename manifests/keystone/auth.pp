@@ -77,7 +77,7 @@ class glare::keystone::auth (
   $admin_url           = 'http://127.0.0.1:9494',
   $internal_url        = 'http://127.0.0.1:9494',
 ) {
-  include ::glare::deps
+  include glare::deps
 
   if $configure_user_role {
     Keystone_user_role["${auth_name}@${tenant}"] ~> Service <| name == 'glare-server' |>

@@ -28,7 +28,7 @@ class glare::config (
   $glare_paste_ini_config = {}
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   validate_legacy(Hash, 'validate_hash', $glare_config)
   validate_legacy(Hash, 'validate_hash', $glare_paste_ini_config)

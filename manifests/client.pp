@@ -12,8 +12,8 @@ class glare::client (
   $ensure = 'present'
 ) {
 
-  include ::glare::deps
-  include ::glare::params
+  include glare::deps
+  include glare::params
 
   package { 'python-glareclient':
     ensure => $ensure,

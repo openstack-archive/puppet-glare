@@ -43,7 +43,7 @@ class glare::db::mysql(
   $allowed_hosts = undef
 ) {
 
-  include ::glare::deps
+  include glare::deps
 
   validate_legacy(String, 'validate_string', $password)
 

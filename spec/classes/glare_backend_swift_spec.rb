@@ -11,7 +11,7 @@ describe 'glare::backend::swift' do
 
     let :pre_condition do
       'class { "glare::keystone::authtoken": password => "pass" }
-       include ::glare'
+       include glare'
     end
 
     describe 'when default parameters' do
