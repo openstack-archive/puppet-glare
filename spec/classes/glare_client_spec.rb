@@ -29,7 +29,15 @@ describe 'glare::client' do
         when 'Debian'
           { :client_package_name => 'python3-glareclient' }
         when 'RedHat'
-          { :client_package_name => 'python-glareclient' }
+          if facts[:operatingsystem] == 'Fedora'
+            { :client_package_name => 'python3-glareclient' }
+          else
+            if facts[:operatingsystemmajrelease] > '7'
+              { :client_package_name => 'python3-glareclient' }
+            else
+              { :client_package_name => 'python-glareclient' }
+            end
+          end
         end
       end
 
