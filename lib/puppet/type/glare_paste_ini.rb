@@ -46,8 +46,8 @@ Puppet::Type.newtype(:glare_paste_ini) do
     defaultto('<SERVICE DEFAULT>')
   end
 
-  autorequire(:package) do
-    'glare'
+  autorequire(:anchor) do
+    ['glare::install::end']
   end
 
 end

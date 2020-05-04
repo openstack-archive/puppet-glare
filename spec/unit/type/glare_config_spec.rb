@@ -1,5 +1,6 @@
 require 'puppet'
 require 'puppet/type/glare_config'
+
 describe 'Puppet::Type.type(:glare_config)' do
   before :each do
     @glare_config = Puppet::Type.type(:glare_config).new(:name => 'DEFAULT/foo', :value => 'bar')
@@ -52,12 +53,12 @@ describe 'Puppet::Type.type(:glare_config)' do
 
   it 'should autorequire the package that install the file' do
     catalog = Puppet::Resource::Catalog.new
-    package = Puppet::Type.type(:package).new(:name => 'glare')
-    catalog.add_resource package, @glare_config
+    anchor = Puppet::Type.type(:anchor).new(:name => 'glare::install::end')
+    catalog.add_resource anchor, @glare_config
     dependency = @glare_config.autorequire
     expect(dependency.size).to eq(1)
     expect(dependency[0].target).to eq(@glare_config)
-    expect(dependency[0].source).to eq(package)
+    expect(dependency[0].source).to eq(anchor)
   end
 
 

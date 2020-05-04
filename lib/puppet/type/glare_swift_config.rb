@@ -46,12 +46,8 @@ Puppet::Type.newtype(:glare_swift_config) do
     defaultto('<SERVICE DEFAULT>')
   end
 
-  autorequire(:package) do
-    if Facter.value(:osfamily) == 'Debian'
-      'glare-api'
-    elsif Facter.value(:osfamily) == 'RedHat'
-      'openstack-glare'
-    end
+  autorequire(:anchor) do
+    ['glare::install::end']
   end
 
 end
