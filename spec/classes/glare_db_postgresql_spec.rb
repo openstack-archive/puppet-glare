@@ -7,18 +7,21 @@ describe 'glare::db::postgresql' do
   end
 
   let :required_params do
-    { :password => 'pw' }
+    { :password => 'glarepass' }
   end
 
-  shared_examples_for 'glare-db-postgresql' do
+  shared_examples_for 'glare::db::postgresql' do
     context 'with only required parameters' do
       let :params do
         required_params
       end
 
-      it { is_expected.to contain_postgresql__server__db('glare').with(
-        :user     => 'glare',
-        :password => 'md5000e10ee12052d5996f40620414c021a'
+      it { is_expected.to contain_openstacklib__db__postgresql('glare').with(
+        :user       => 'glare',
+        :password   => 'glarepass',
+        :dbname     => 'glare',
+        :encoding   => nil,
+        :privileges => 'ALL',
       )}
     end
   end
@@ -31,7 +34,7 @@ describe 'glare::db::postgresql' do
         facts.merge!(OSDefaults.get_facts({ :concat_basedir => '/var/lib/puppet/concat' }))
       end
 
-      it_behaves_like 'glare-db-postgresql'
+      it_behaves_like 'glare::db::postgresql'
     end
   end
 end

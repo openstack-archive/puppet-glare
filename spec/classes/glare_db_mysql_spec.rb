@@ -7,22 +7,22 @@ describe 'glare::db::mysql' do
   end
 
   let :required_params do
-    { :password => 'fooboozoo_default_password', }
+    { :password => 'glarepass', }
   end
 
-  shared_examples_for 'glare-db-mysql' do
+  shared_examples_for 'glare::db::mysql' do
     context 'with only required params' do
       let :params do
         required_params
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('glare').with(
-        :user           => 'glare',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'glare',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
+        :user     => 'glare',
+        :password => 'glarepass',
+        :dbname   => 'glare',
+        :host     => '127.0.0.1',
+        :charset  => 'utf8',
+        :collate  => 'utf8_general_ci',
       )}
     end
 
@@ -32,13 +32,13 @@ describe 'glare::db::mysql' do
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('glare').with(
-        :user           => 'glare',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'glare',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
-        :allowed_hosts  => ['127.0.0.1','%']
+        :user          => 'glare',
+        :password      => 'glarepass',
+        :dbname        => 'glare',
+        :host          => '127.0.0.1',
+        :charset       => 'utf8',
+        :collate       => 'utf8_general_ci',
+        :allowed_hosts => ['127.0.0.1','%']
       )}
     end
 
@@ -48,13 +48,13 @@ describe 'glare::db::mysql' do
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('glare').with(
-        :user           => 'glare',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'glare',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
-        :allowed_hosts  => '192.168.1.1'
+        :user          => 'glare',
+        :password      => 'glarepass',
+        :dbname        => 'glare',
+        :host          => '127.0.0.1',
+        :charset       => 'utf8',
+        :collate       => 'utf8_general_ci',
+        :allowed_hosts => '192.168.1.1'
       )}
     end
   end
@@ -67,7 +67,7 @@ describe 'glare::db::mysql' do
         facts.merge!(OSDefaults.get_facts())
       end
 
-      it_behaves_like 'glare-db-mysql'
+      it_behaves_like 'glare::db::mysql'
     end
   end
 end

@@ -49,7 +49,7 @@ class glare::db::mysql(
 
   ::openstacklib::db::mysql { 'glare':
     user          => $user,
-    password_hash => mysql::password($password),
+    password      => $password,
     dbname        => $dbname,
     host          => $host,
     charset       => $charset,
