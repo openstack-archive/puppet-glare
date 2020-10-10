@@ -16,6 +16,8 @@ describe 'glare::db::postgresql' do
         required_params
       end
 
+      it { is_expected.to contain_class('glare::deps') }
+
       it { is_expected.to contain_openstacklib__db__postgresql('glare').with(
         :user       => 'glare',
         :password   => 'glarepass',
