@@ -4,6 +4,8 @@ describe 'glare::db::sync' do
 
   shared_examples_for 'glare-dbsync' do
 
+    it { is_expected.to contain_class('glare::deps') }
+
     it 'runs glare-manage db_sync' do
       is_expected.to contain_exec('glare-db-sync').with(
         :command     => 'glare-db-manage  upgrade',
