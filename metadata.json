@@ -4,7 +4,7 @@
     "author": "OpenStack Contributors",
     "summary": "Puppet module for OpenStack Glare",
     "license": "Apache-2.0",
-    "source": "git://github.com/openstack/puppet-glare.git",
+    "source": "https://opendev.org/openstack/puppet-glare.git",
     "project_page": "https://launchpad.net/puppet-glare",
     "issues_url": "https://bugs.launchpad.net/puppet-glare",
     "description": "Installs and configures OpenStack Glare.",
