@@ -8,8 +8,13 @@
 #   to the glare-db-manage command.
 #   Defaults to ''
 #
+# [*db_sync_timeout*]
+#   (Optional) Timeout for the execution of the db_sync
+#   Defaults to 300
+#
 class glare::db::sync(
-  $extra_params  = '',
+  $extra_params    = '',
+  $db_sync_timeout = 300,
 ) {
 
   include glare::deps
@@ -21,6 +26,7 @@ class glare::db::sync(
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,
+    timeout     => $db_sync_timeout,
     logoutput   => on_failure,
     subscribe   => [
       Anchor['glare::install::end'],

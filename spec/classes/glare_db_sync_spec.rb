@@ -14,6 +14,7 @@ describe 'glare::db::sync' do
         :refreshonly => 'true',
         :try_sleep   => 5,
         :tries       => 10,
+        :timeout     => 300,
         :logoutput   => 'on_failure',
         :subscribe   => ['Anchor[glare::install::end]',
                          'Anchor[glare::config::end]',
@@ -23,10 +24,11 @@ describe 'glare::db::sync' do
       )
     end
 
-    describe "overriding extra_params" do
+    describe "overriding params" do
       let :params do
         {
-          :extra_params => '--config-file /etc/glare/glare.conf',
+          :extra_params    => '--config-file /etc/glare/glare.conf',
+          :db_sync_timeout => 750,
         }
       end
 
@@ -38,6 +40,7 @@ describe 'glare::db::sync' do
           :refreshonly => 'true',
           :try_sleep   => 5,
           :tries       => 10,
+          :timeout     => 750,
           :logoutput   => 'on_failure',
           :subscribe   => ['Anchor[glare::install::end]',
                            'Anchor[glare::config::end]',
