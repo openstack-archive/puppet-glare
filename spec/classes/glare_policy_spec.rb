@@ -5,7 +5,7 @@ describe 'glare::policy' do
   shared_examples_for 'glare policies' do
     let :params do
       {
-        :policy_path => '/etc/glare/policy.json',
+        :policy_path => '/etc/glare/policy.yaml',
         :policies    => {
           'context_is_admin' => {
             'key'   => 'context_is_admin',
@@ -17,13 +17,14 @@ describe 'glare::policy' do
 
     it 'set up the policies' do
       is_expected.to contain_openstacklib__policy__base('context_is_admin').with({
-        :key        => 'context_is_admin',
-        :value      => 'foo:bar',
-        :file_user  => 'root',
-        :file_group => 'glare',
+        :key         => 'context_is_admin',
+        :value       => 'foo:bar',
+        :file_user   => 'root',
+        :file_group  => 'glare',
+        :file_format => 'yaml',
       })
       is_expected.to contain_oslo__policy('glare_config').with(
-        :policy_file => '/etc/glare/policy.json',
+        :policy_file => '/etc/glare/policy.yaml',
       )
     end
   end
