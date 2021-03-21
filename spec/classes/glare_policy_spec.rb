@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'glare::policy' do
-
-  shared_examples_for 'glare policies' do
+  shared_examples 'glare::policy' do
     let :params do
       {
-        :policy_path => '/etc/glare/policy.yaml',
-        :policies    => {
+        :enforce_scope => false,
+        :policy_path   => '/etc/glare/policy.yaml',
+        :policies      => {
           'context_is_admin' => {
             'key'   => 'context_is_admin',
             'value' => 'foo:bar'
@@ -24,20 +24,21 @@ describe 'glare::policy' do
         :file_format => 'yaml',
       })
       is_expected.to contain_oslo__policy('glare_config').with(
-        :policy_file => '/etc/glare/policy.yaml',
+        :enforce_scope => false,
+        :policy_file   => '/etc/glare/policy.yaml',
       )
     end
   end
 
   on_supported_os({
-    :supported_os   => OSDefaults.get_supported_os
+    :supported_os => OSDefaults.get_supported_os
   }).each do |os,facts|
     context "on #{os}" do
       let (:facts) do
         facts.merge!(OSDefaults.get_facts())
       end
 
-      it_configures 'glare policies'
+      it_behaves_like 'glare::policy'
     end
   end
 end
