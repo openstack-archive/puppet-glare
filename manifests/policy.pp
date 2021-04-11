@@ -32,11 +32,16 @@
 #   (Optional) Path to the glare policy.yaml file
 #   Defaults to /etc/glare/policy.yaml
 #
+# [*policy_dirs*]
+#   (Optional) Path to the glare policy folder
+#   Defaults to $::os_service_default
+#
 class glare::policy (
   $enforce_scope        = $::os_service_default,
   $enforce_new_defaults = $::os_service_default,
   $policies             = {},
   $policy_path          = '/etc/glare/policy.yaml',
+  $policy_dirs          = $::os_service_default,
 ) {
 
   include glare::deps
@@ -56,7 +61,8 @@ class glare::policy (
   oslo::policy { 'glare_config':
     enforce_scope        => $enforce_scope,
     enforce_new_defaults => $enforce_new_defaults,
-    policy_file          => $policy_path
+    policy_file          => $policy_path,
+    policy_dirs          => $policy_dirs,
   }
 
 }
